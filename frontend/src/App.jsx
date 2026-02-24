@@ -3,6 +3,9 @@ import { BrowserRouter as BRouter, Route, Routes } from 'react-router-dom';
 import CategoryList from './components/categories/List';
 import CategoryCreate from './components/categories/Create';
 import CategoryEdit from './components/categories/Edit';
+import ProductList from './components/products/List';
+import ProductCreate from './components/products/Create';
+import ProductEdit from './components/products/Edit';
 import "./custom.css";
 function App() {
   return <>
@@ -11,6 +14,9 @@ function App() {
         <Route path='/categories' element={<CategoryList></CategoryList>} ></Route>
         <Route path='/categories/create' element={<CategoryCreate></CategoryCreate>} ></Route>
         <Route path='/categories/edit/:id' element={<CategoryEdit></CategoryEdit>} ></Route>
+        <Route path='/products' element={<ProductList></ProductList>} ></Route>
+        <Route path='/products/create' element={<ProductCreate></ProductCreate>} ></Route>
+        <Route path='/products/edit/:id' element={<ProductEdit></ProductEdit>} ></Route>
       </Routes>
     </BRouter>
   </>
