@@ -21,11 +21,11 @@ app.route('/category/:id')
 
 app.route('/products')
     .get(products.index)
-  //  .post(porducts.store);
-// app.route('/products/:id')
-// .get( porducts.show)
-// .put(porducts.update)
-// .delete(porducts.destroy);
+    .post(products.store);
+app.route('/products/:id')
+ .get( products.show)
+ .put(products.update)
+ .delete(products.destroy);
 
 export default app;
 

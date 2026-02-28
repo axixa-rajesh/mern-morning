@@ -1,6 +1,7 @@
 import { db } from "../config/db.js";
 
 export default class CategoryController{
+    
     async index(req, res) {
          let data;
         data = (await db.query("select * from category "))[0]; 

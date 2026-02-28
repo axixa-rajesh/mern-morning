@@ -9,12 +9,12 @@ import { useEffect } from 'react';
 const MySwal = withReactContent(Swal)
 function Edit() {
     let redirect = useNavigate();
-    let categoryname = useRef('');
-    let categorydescription = useRef('');
+    let name = useRef('');
+    let price = useRef('');
     let [info,setInfo] = useState({});
     let id = useParams().id;
     useEffect(() => {
-        find(`category/${id}`).then(r => {
+        find(`products/${id}`).then(r => {
             setInfo(r);
         }).catch(e => {
             console.log(e);
@@ -24,8 +24,8 @@ function Edit() {
     const saveData = (e) => {
         e.preventDefault();
         const info = {
-            name: categoryname.current.value,
-            description: categorydescription.current.value
+            name: name.current.value,
+            price: price.current.value
         };
         MySwal.fire({
             title: 'Trying to updating',
@@ -35,7 +35,7 @@ function Edit() {
                 MySwal.showLoading()
 
                 try {
-                    const res = await update('category/'+id, info)
+                    const res = await update('products/'+id, info)
                     
                     
                     MySwal.hideLoading()
@@ -46,7 +46,7 @@ function Edit() {
                         html: <p>{res.data}</p>
                     })
                    
-                        redirect('/categories');
+                        redirect('/products');
                    
 
                 } catch (err) {
@@ -69,15 +69,15 @@ function Edit() {
     return (
 
         <div className={ "min-h-screen bg-gray-100 flex items-center justify-center px-4" }>
-                This is rajesh branch data
+               
             <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-6">
 
                         <h2 className="text-2xl font-semibold text-gray-800 mb-1">
-                            Edit Category
+                            Edit Products
                         </h2>
 
                             <p className="text-sm text-gray-500 mb-6">
-                                Edit category to organize your content.
+                                Edit products to organize your content.
                             </p>
                         
                 {/* Form */}
@@ -86,11 +86,11 @@ function Edit() {
                     {/* Name */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Category Name
+                            Products Name
                         </label>
                         <input
                             type="text"
-                            ref={categoryname}
+                            ref={name}
                             defaultValue={info['name']}
                             placeholder="e.g. Electronics"
                             className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm
@@ -98,17 +98,17 @@ function Edit() {
                         />
                     </div>
 
-                    {/* Description */}
+                    {/* Price */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Description
+                            Price
                         </label>
                         <textarea
-                            rows="4" ref={categorydescription}
-                            placeholder="Write a short description..."
+                            rows="4" ref={price}
+                            placeholder="Write a short price..."
                             className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm resize-none
                          focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                            defaultValue={ info.description }></textarea>
+                            defaultValue={ info.price }></textarea>
                     </div>
 
                     {/* Action */}
@@ -119,7 +119,7 @@ function Edit() {
                         onClick={saveData}
 
                     >
-                        Update Category
+                        Update Products
                     </button>
                 </form>
             </div>
