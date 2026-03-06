@@ -13,7 +13,7 @@ export default class ProductController{
     }
     async index(req, res) {
         try {
-            const data = await this.product.fetchWithCats();
+            const data = await this.product.all();
             if (data.length) {
                 res.status(200).json({
                     message: "done ",

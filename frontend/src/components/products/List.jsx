@@ -68,7 +68,7 @@ function List(props) {
                                             data.map((info, index) => {
                                                 return <tr key={"row" + index} className="hover:bg-gray-50 transition-colors">
                                                     <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900">{index + 1}</td>
-                                                    <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{info.product_name}</td>
+                                                    <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{info.name}</td>
                                                     <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{info.category_name}</td>
                                                     <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{info.price}</td>
                                                     <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
