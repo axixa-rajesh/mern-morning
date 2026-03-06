@@ -13,7 +13,7 @@ export default class ProductController{
     }
     async index(req, res) {
         try {
-            const data = await this.product.all();
+            const data = await this.product.fetchWithCats();
             if (data.length) {
                 res.status(200).json({
                     message: "done ",
@@ -70,7 +70,7 @@ export default class ProductController{
           let info = {
             name: req.body.name,
             price: req.body.price,
-            category_id:1
+            category_id:req.body.category_id??1
         }
           if (!info.name ||  !info.price) {
             res.status((400)).json({

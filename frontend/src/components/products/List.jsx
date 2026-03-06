@@ -56,7 +56,8 @@ function List(props) {
                                 <thead className="bg-gray-50">
                                     <tr>
                                         <th className='px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500'>S.No</th>
-                                        <th className='px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500'>Name</th>
+                                        <th className='px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500'>Product Name</th>
+                                        <th className='px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500'>Category Name</th>
                                         <th className='px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500'>Price</th>
                                         <th className='px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500'>Action</th>
                                     </tr>
@@ -67,7 +68,8 @@ function List(props) {
                                             data.map((info, index) => {
                                                 return <tr key={"row" + index} className="hover:bg-gray-50 transition-colors">
                                                     <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900">{index + 1}</td>
-                                                    <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{info.name}</td>
+                                                    <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{info.product_name}</td>
+                                                    <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{info.category_name}</td>
                                                     <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{info.price}</td>
                                                     <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
                                                         <Link className="px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 shadow-lg transition-all" to={"/products/edit/" + info.product_id}>Edit</Link>

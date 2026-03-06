@@ -1,31 +1,44 @@
 import React, { useState } from 'react';
 import { useRef } from 'react';
-import { find, update } from '../../libs/db';
+import { find, update,all } from '../../libs/db';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-
+import Select from 'react-select'
 const MySwal = withReactContent(Swal)
 function Edit() {
+    const [options, loadOptions] = useState([]);
     let redirect = useNavigate();
     let name = useRef('');
     let price = useRef('');
-    let [info,setInfo] = useState({});
+    let [info, setInfo] = useState({});
+    const [category_id, setCategory] = useState({});
     let id = useParams().id;
     useEffect(() => {
-        find(`products/${id}`).then(r => {
-            setInfo(r);
+         
+        find(`products/${id}`).then(fr => {
+            setInfo(fr);
+            all('category').then(r => {
+                const data = r.map(info => ({ value: info.id, label: info.name }))
+                loadOptions(data);
+                setCategory(data.find(val => val.value == fr.category_id))
+
+            })
         }).catch(e => {
             console.log(e);
-        }) 
-    },[]);
+        })
+       
+    }, []);
+    
+   
     
     const saveData = (e) => {
         e.preventDefault();
         const info = {
             name: name.current.value,
-            price: price.current.value
+            price: price.current.value,
+            category_id:category_id.value
         };
         MySwal.fire({
             title: 'Trying to updating',
@@ -97,7 +110,16 @@ function Edit() {
                          focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                         />
                     </div>
-
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Select Category
+                        </label>
+                        <Select value={category_id}
+                           
+                            onChange={setCategory} options={options}
+                            
+                        />
+                    </div>
                     {/* Price */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">

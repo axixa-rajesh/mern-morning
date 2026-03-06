@@ -8,6 +8,10 @@ export default class Model{
       const   data = (await db.query(`select ${cols} from ${this.table} `))[0]; 
         return data;
     }
+     async query(qry) {
+      const   data = (await db.query(qry))[0]; 
+        return data;
+    }
      async find(id,cols="*") {
       const   data = (await db.query(`select ${cols} from ${this.table} where ${this.key}='${id}'`))[0]; 
         return data;
@@ -34,4 +38,5 @@ export default class Model{
       const   data = (await db.query(`delete from ${this.table} where ${this.key}='${id}'`))[0]; 
         return data;
     }
+
 }
