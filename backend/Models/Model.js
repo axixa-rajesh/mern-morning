@@ -5,18 +5,24 @@ export default class Model{
     constructor(table, pk) {
         
         this.table = mongoose.connection.collection(table);
-        this.key = pk ?? 'id';
+        this.key = pk ?? '_id';
     }
     async all(cols="*") {
-        const data = await this.table.find().toArray(); 
+        const data = (await this.table.find().toArray()); 
+        //console.log(data);
+        
         return data;
     }
     //  async query(qry) {
     //   const   data = (await db.query(qry))[0]; 
     //     return data;
     // }
-     async find(id,cols="*") {
-         const data = (await this.table.find({ [this.key]: id })); 
+    async find(id, cols = "*") {
+       
+         
+        const data = (await this.table.find({ [this.key]: new mongoose.Types.ObjectId(id) }).toArray()); 
+      
+        
         return data;
     }
     async create(reqdata) {
@@ -27,18 +33,13 @@ export default class Model{
     }
     async update(id,reqdata) {
 
-        // let sql = `update ${this.table} set `;
-        // for (let key in reqdata) {
-        //     sql += `${key}="${reqdata[key]}",`;
-        // }
-        // sql = sql.slice(0, -1) + ` where ${this.key}='${id}'`;
-        // const   data = (await db.query(sql))[0]; 
-        return {};
+        const data = (await this.table.updateOne({ [this.key]: new mongoose.Types.ObjectId(id) }, { $set: reqdata })); 
+        return data;
         
     }
     async delete(id){
-     // const   data = (await db.query(`delete from ${this.table} where ${this.key}='${id}'`))[0]; 
-        return {};
+      const data = (await this.table.deleteOne({ [this.key]: new mongoose.Types.ObjectId(id) })); 
+        return data;
     }
 
 }

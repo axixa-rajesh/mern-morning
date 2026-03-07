@@ -72,9 +72,9 @@ function List(props) {
                                                     <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{info.category_name}</td>
                                                     <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{info.price}</td>
                                                     <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                                                        <Link className="px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 shadow-lg transition-all" to={"/products/edit/" + info.product_id}>Edit</Link>
+                                                        <Link className="px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 shadow-lg transition-all" to={"/products/edit/" + info._id}>Edit</Link>
                                                         <button className="px-6 py-3 mx-3 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 shadow-lg transition-all" onClick={() => {
-                                                            deleteit(info.product_id)
+                                                            deleteit(info._id)
                                                         }}>Delete</button>
                                                     </td>
                                                 </tr>

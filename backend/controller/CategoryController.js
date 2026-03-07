@@ -1,10 +1,21 @@
-import { db } from "../config/db.js";
+import { db,mongoose } from "../config/db.js";
+import Category from "../Models/Category.js";
 
+await db();
 export default class CategoryController{
-    
+     constructor() {
+            this.category = new Category();
+            this.index = this.index.bind(this);
+            this.store = this.store.bind(this);
+            this.update = this.update.bind(this);
+            this.show = this.show.bind(this);
+            this.destroy = this.destroy.bind(this);
+          
+            
+        }
     async index(req, res) {
          let data;
-        data = (await db.query("select * from category "))[0]; 
+        data = await  this.category.all(); 
         // data=[{id:1,name:"abc",description:"xyz"}]
         res.status((data.length?200:404)).json({
             message: (data.length?"Data successfully sent":"Data not found in db"),
@@ -22,7 +33,7 @@ export default class CategoryController{
         } else {
             let result;
             try {
-                result = await db.query(`insert into category(name,description) values(?,?)`, [name, description]);
+                result = await this.category.create({name,description});
             } catch (e) {
             res.status((500)).json({
                 message: "Data not saved somthing went wrong",
@@ -38,7 +49,7 @@ export default class CategoryController{
     async show(req, res) {
         let data;
         let id = req.params.id;
-        data = (await db.query("select * from category where id="+id))[0]; 
+        data = (await this.category.find(id)); 
         res.status((data.length?200:404)).json({
         message: (data.length?"Data successfully sent":"Data not found in db"),
         data: data[0]
@@ -55,7 +66,7 @@ export default class CategoryController{
         } else {
             let result;
             try {
-                result = await db.query(`update category set name=?,description=? where id=?`, [name, description, id]);
+                result = await this.category.update(id,{name,description});
             } catch (e) {
                 res.status((500)).json({
                     message: "Data not update, somthing went wrong",
@@ -72,7 +83,7 @@ export default class CategoryController{
          let id = req.params.id;
         let result;
         try {
-            result = await db.query(`delete from category where id=?`, [id]);
+            result = await this.category.delete(id);
         } catch (e) {
             res.status((500)).json({
                 message: "Data not delete, somthing went wrong",
