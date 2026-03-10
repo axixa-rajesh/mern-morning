@@ -6,7 +6,29 @@ export default class Product extends Model{
         super('products','_id');
     }
     async fetchWithCats() {
-        let sql = `select product_id,category_id, products.name as product_name, category.name as category_name,price from products left join category on category.id=category_id order by product_id desc`;
-        return await this.query(sql);
+        
+         const data = (await this.table.aggregate([
+  {
+    $lookup: {
+      from: "category",
+      localField: "category_id",
+      foreignField: "_id",
+      as: "category"
+    }
+  },
+  { $unwind: "$category" },
+  {
+    $project: {
+      name: 1,
+      price: 1,
+          _id: 1,
+      category_id:1,
+      category_name: "$category.name"
+    }
+  }
+         ]).toArray()); 
+        console.log(data);
+        
+        return data;
     }
 }

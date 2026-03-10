@@ -14,7 +14,7 @@ function Create({ usingModel, closeModal, loaddata }) {
     const [category_id, setCategory] = useState(null);
     useEffect(() => {
         all('category').then(r => {
-            const data = r.map(info => ({ value: info.id, label: info.name }))
+            const data = r.map(info => ({ value: info._id, label: info.name }))
             loadOptions(data);
            console.log(data);
            

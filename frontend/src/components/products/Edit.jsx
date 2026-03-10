@@ -20,7 +20,7 @@ function Edit() {
         find(`products/${id}`).then(fr => {
             setInfo(fr);
             all('category').then(r => {
-                const data = r.map(info => ({ value: info.id, label: info.name }))
+                const data = r.map(info => ({ value: info._id, label: info.name }))
                 loadOptions(data);
                 setCategory(data.find(val => val.value == fr.category_id))
 
