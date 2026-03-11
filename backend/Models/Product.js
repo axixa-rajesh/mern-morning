@@ -21,7 +21,7 @@ export default class Product extends Model{
     $project: {
       name: 1,
       price: 1,
-          _id: 1,
+      _id: 1,
       category_id:1,
       category_name: "$category.name"
     }
