@@ -5,6 +5,7 @@ import CategoryCreate from './components/categories/Create';
 import CategoryEdit from './components/categories/Edit';
 import ProductList from './components/products/List';
 import ProductCreate from './components/products/Create';
+import UserCreate from './components/users/Registration';
 import ProductEdit from './components/products/Edit';
 import "./custom.css";
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path='/categories/edit/:id' element={<CategoryEdit></CategoryEdit>} ></Route>
         <Route path='/products' element={<ProductList></ProductList>} ></Route>
         <Route path='/products/create' element={<ProductCreate></ProductCreate>} ></Route>
+        <Route path='/user/create' element={<UserCreate></UserCreate>} ></Route>
         <Route path='/products/edit/:id' element={<ProductEdit></ProductEdit>} ></Route>
       </Routes>
     </BRouter>
