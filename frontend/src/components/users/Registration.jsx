@@ -150,7 +150,7 @@ const Registration = () => {
             MySwal.fire({
                 title: res?.message || "Registration Successful",
                 icon: "success",
-                text: res?.data || "User registered successfully"
+                text:  "User registered successfully"
             })
 
             /*

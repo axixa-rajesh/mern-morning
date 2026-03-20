@@ -8,8 +8,36 @@ export default class AuthController {
         this.signIn = this.signIn.bind(this);
         this.register = this.register.bind(this);      
     }
-    signIn(req, res) {
-        res.status(200).json({   message: "done ",data:" I am testing login..."});       
+    async signIn(req, res) {
+        let { email, password } = req.body;
+        try {
+            let user = (await this.user.findCustom({ email }))[0];
+            if (!user) {
+                return res.status(400).json({
+                    message: "Invalid User credentials ",
+                    data: []
+                });
+            }
+            const match = await bcrypt.compare(password, user.password);
+            if (!match) {
+                return res.status(400).json({
+                    message: "Invalid User credentials ",
+                    data: []
+                });
+            }
+            const token = generateToken(user._id)
+
+            res.json({
+                user,
+                token
+            })
+        } catch (e) {
+               return res.status(500).json({
+                    message: "Internal server error",
+                    data: []
+                });
+        }
+        
     }
    async register(req,res) {
              let { name, email,password } = req.body; 

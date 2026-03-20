@@ -25,6 +25,12 @@ export default class Model{
         
         return data;
     }
+      async findCustom(obj) {
+       
+         
+        const data = (await this.table.find(obj).toArray()); 
+        return data;
+    }
     async create(reqdata) {
 
         const   data = (await this.table.insertOne(reqdata)); 
