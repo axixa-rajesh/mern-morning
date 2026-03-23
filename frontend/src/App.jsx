@@ -8,6 +8,7 @@ import ProductCreate from './components/products/Create';
 import UserCreate from './components/users/Registration';
 import ProductEdit from './components/products/Edit';
 import "./custom.css";
+import Login from './components/users/Login';
 function App() {
   return <>
     <BRouter>
@@ -18,6 +19,7 @@ function App() {
         <Route path='/products' element={<ProductList></ProductList>} ></Route>
         <Route path='/products/create' element={<ProductCreate></ProductCreate>} ></Route>
         <Route path='/user/create' element={<UserCreate></UserCreate>} ></Route>
+        <Route path='/user/login' element={<Login></Login>} ></Route>
         <Route path='/products/edit/:id' element={<ProductEdit></ProductEdit>} ></Route>
       </Routes>
     </BRouter>
