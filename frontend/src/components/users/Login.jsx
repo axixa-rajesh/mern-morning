@@ -73,7 +73,7 @@ function Login(props) {
                 API CALL
                 */
                 const res = await store("auth/signin", info)
-                console.log(res);
+                localStorage.setItem( "token", res.token );
                 
                 MySwal.hideLoading()
     

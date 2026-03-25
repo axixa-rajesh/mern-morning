@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import Modal from './Modal'
 import Create from './Create'
 import {Link} from "react-router-dom"
+import checklogin from '../../libs/checklogin'
 function List(props) {
     const [data, setData] = useState([])
     const [isReload, setReload] = useState(false)
@@ -71,9 +72,15 @@ function List(props) {
                                                     <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">{info.description}</td>
                                                     <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
                                                         <Link className="px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 shadow-lg transition-all" to={"/categories/edit/" + info._id}>Edit</Link>
+                                                       
                                                         <button className="px-6 py-3 mx-3 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 shadow-lg transition-all" onClick={() => {
-                                                            deleteit(info._id)
-                                                        }}>Delete</button>
+                                                            if (checklogin())
+                                                                deleteit(info._id)
+                                                            else {
+                                                                window.alert("Login required!");
+                                                            }
+                                                            }}>Delete</button>
+                                                            
                                                     </td>
                                                 </tr>
                                             })

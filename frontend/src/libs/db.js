@@ -2,7 +2,13 @@ import  axios  from 'axios';
 const APIURL = import.meta.env.VITE_API_URL || "127.0.0.1:5000/";
 export async function all(module) {
     try {
-        const object = await axios.get(APIURL+module);
+        const token = localStorage.getItem("token");
+
+        const object = await axios.get(APIURL+module,{
+  headers: {
+    auth: `${token}`
+  }
+});
         return(object.data.data);
         
     } catch (e) {
