@@ -95,6 +95,7 @@ function Login(props) {
                     password: "",
                  
                 })
+                window.location = "/dashboard";
     
             } catch (err) {
                 console.log(err);

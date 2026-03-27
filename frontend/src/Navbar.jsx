@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 function Navbar(props) {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -20,21 +21,23 @@ function Navbar(props) {
                 {/* Desktop Menu */}
                 <div className="hidden md:flex items-center gap-6">
 
-                    <a href="/" className="hover:text-yellow-400">Home</a>
 
 
-                    <a href="/categories" className="hover:text-yellow-400">Categories</a>
+                    <Link to="/categories" className="hover:text-yellow-400">Categories</Link>
 
-                    <a href="/products" className="hover:text-yellow-400">Products</a>
+                    <Link to="/products" className="hover:text-yellow-400">Products</Link>
                     {!token ? (
                         <>
-                            <a href="/user/login" className="hover:text-yellow-400">Login</a>
-                            <a href="/user/create" className="bg-yellow-400 text-black px-3 py-1 rounded hover:bg-yellow-300">
+                            <Link to="/" className="hover:text-yellow-400">Home</Link>
+
+                            <Link to="/user/login" className="hover:text-yellow-400">Login</Link>
+                            <Link to="/user/create" className="bg-yellow-400 text-black px-3 py-1 rounded hover:bg-yellow-300">
                                 Register
-                            </a>
+                            </Link>
                         </>
                     ) : (
                         <>
+                            <Link to="/dashboard" className="hover:text-yellow-400">Home</Link>
                             <span className="text-green-400">Welcome User</span>
                             <button
                                 onClick={handleLogout}
@@ -59,18 +62,18 @@ function Navbar(props) {
             {isOpen && (
                 <div className="mt-4 flex flex-col gap-3 md:hidden">
 
-                    <a href="/">Home</a>
+                    <Link to="/">Home</Link>
 
-                    <a href="/category/electronics">Electronics</a>
-                    <a href="/category/fashion">Fashion</a>
-                    <a href="/category/books">Books</a>
+                    <Link to="/category/electronics">Electronics</Link>
+                    <Link to="/category/fashion">Fashion</Link>
+                    <Link to="/category/books">Books</Link>
 
-                    <a href="/products">Products</a>
+                    <Link to="/products">Products</Link>
 
                     {!token ? (
                         <>
-                            <a href="/login">Login</a>
-                            <a href="/register">Register</a>
+                            <Link to="/login">Login</Link>
+                            <Link to="/register">Register</Link>
                         </>
                     ) : (
                         <>

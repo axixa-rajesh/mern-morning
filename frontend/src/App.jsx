@@ -12,6 +12,8 @@ import Login from './components/users/Login';
 import checklogin from './libs/checklogin';
 import Navbar from './Navbar';
 import ValidRoute from './ValidRoute';
+import Dashbord from './Dashbord';
+import DashboardHome from './DashboardHome';
 function App() {
   //localStorage.removeItem('token');
  
@@ -19,11 +21,12 @@ function App() {
     <BRouter>
       <Navbar></Navbar>
       <Routes>
-      
+        <Route path='/' element={<DashboardHome></DashboardHome>} ></Route>
         <Route path='/categories' element={<CategoryList></CategoryList>} ></Route>
         <Route path='/categories/create' element={<CategoryCreate></CategoryCreate>} ></Route>
         <Route path='/categories/edit/:id' element={<CategoryEdit></CategoryEdit>} ></Route>
         <Route element={<ValidRoute />}>
+          <Route path='/dashboard' element={<Dashbord></Dashbord>}></Route>
         <Route path='/products' element={<ProductList></ProductList>} ></Route>
         <Route path='/products/create' element={<ProductCreate></ProductCreate>} ></Route>
           <Route path='/products/edit/:id' element={<ProductEdit></ProductEdit>} ></Route>
